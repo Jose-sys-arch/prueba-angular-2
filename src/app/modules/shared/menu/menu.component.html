@@ -1,0 +1,36 @@
+<div class="sidebar vh-100">
+  <ul nz-menu nzTheme="dark" nzMode="inline">
+    @for (item of items; track item.nombreOpcion) { @if (!item.items) {
+    @if(item.nombreOpcion == 'Cerrar Sesión') {
+    <li nz-menu-item (click)="closeSession()">
+      <span class="icon" nz-icon [nzType]="item.icon!"></span>
+      <span class="title-item"> {{ item.nombreOpcion }} </span>
+    </li>
+    }@else {
+    <li nz-menu-item [routerLink]="item.url">
+      <span class="icon" nz-icon [nzType]="item.icon!"></span>
+      <span class="title-item"> {{ item.nombreOpcion }} </span>
+    </li>
+    } }@else {
+    <li
+      class="title-item"
+      nz-submenu
+      [nzTitle]="item.nombreOpcion!"
+      [nzIcon]="item.icon!"
+    >
+      <ul>
+        @for (subItem of item.items; track subItem.nombreOpcion) {
+        <li [routerLink]="subItem.url" nz-menu-item>
+          <span class="icon" nz-icon [nzType]="subItem.icon!"></span>
+          <span> {{ subItem.nombreOpcion }} </span>
+        </li>
+        }
+      </ul>
+    </li>
+    } }
+  </ul>
+</div>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

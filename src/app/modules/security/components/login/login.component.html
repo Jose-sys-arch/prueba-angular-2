@@ -1,0 +1,57 @@
+@if (successLogin) {
+<div class="alert alert-success" role="alert">Sesion Iniciada</div>
+}@else if (errorLogin) {
+<div class="alert alert-danger" role="alert">Hubo un error</div>
+}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 pt-5">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Iniciar Sesión</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="email" class="form-label">Usuario o Correo</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Ingrese su usuario o correo"
+                formControlName="email"
+              />
+              @if (loginForm.get('email')?.hasError('required') &&
+              loginForm.get('email')?.touched) {
+              <div class="text-danger">El correo o usuario es requerido</div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Ingrese su contraseña"
+                formControlName="password"
+              />
+              @if (loginForm.get('password')?.hasError('required') &&
+              loginForm.get('password')?.touched) {
+              <div class="text-danger">La contraseña es requerida</div>
+              }
+              <a href="forgot-password" class="mt-2 d-block text-end"
+                >Olvidé mi contraseña</a
+              >
+            </div>
+            <a href="register" class="mt-2 d-block text-end"
+                >Crear una cuenta</a
+              >
+            <button type="submit" class="btn btn-primary">
+              Iniciar Sesión
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
